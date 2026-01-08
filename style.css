@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+#coin {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+  box-shadow:
+    inset -5px -5px 10px rgba(0,0,0,0.3),
+    inset 5px 5px 10px rgba(255,255,255,0.3),
+    0 8px 20px rgba(0,0,0,0.5);
+}
+
+.flip {
+  animation: flipCoin 0.6s ease-in-out;
+}
+
+@keyframes flipCoin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+button {
+  padding: 12px 18px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btns {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  #coin {
+    width: 70px;
+    height: 70px;
+  }
+}
+#coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#coinText {
+  font-size: 22px;
+  font-weight: bold;
+  color: #3a2a00;
+}
+
+/* WIN / LOSE effects */
+.win {
+  box-shadow: 0 0 25px 8px rgba(0,255,0,0.6);
+}
+
+.lose {
+  animation: shake 0.3s;
+  box-shadow: 0 0 25px 8px rgba(255,0,0,0.6);
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}

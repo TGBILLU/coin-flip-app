@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coin Flip App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <h1>🪙 Coin Flip</h1>
+
+    <div id="coin">
+  <span id="coinText">?</span>
+</div>
+<p id="walletStatus">🔌 Wallet not connected</p>
+
+
+    <button id="connectBtn">Start Game</button>
+
+    <div id="game" style="display:none;">
+      <p>🪙 Coins: <span id="coins">0</span></p>
+      <p>Streak: <span id="streak">0</span> days</p>
+
+      <div class="btns">
+        <button onclick="flipCoin('HEAD')">HEAD</button>
+        <button onclick="flipCoin('TAIL')">TAIL</button>
+      </div>
+
+      <p id="result"></p>
+    </div>
+
+  </div>
+
+  <audio id="winSound" src="win.mp3"></audio>
+  <audio id="loseSound" src="lose.mp3"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>
