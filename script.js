@@ -31,8 +31,68 @@ document.getElementById("connectBtn").onclick = async () => {
     return;
   }
 
+  // 1️⃣ Connect wallet
   const accounts = await window.ethereum.request({
     method: "eth_requestAccounts",
+  });
+
+  // 2️⃣ Try switch to Base
+  try {
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x2105" }], // Base Mainnet
+    });
+  } catch (switchError) {
+    // 3️⃣ Agar Base added nahi hai → ADD karo
+    if (switchError.code === 4902) {
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            chainId: "0x2105",
+            chainName: "Base Mainnet",
+            rpcUrls: ["https://mainnet.base.org"],
+            nativeCurrency: {
+              name: "Ether",
+              symbol: "ETH",
+              decimals: 18,
+            },
+            blockExplorerUrls: ["https://basescan.org"],
+          },
+        ],
+      });
+    } else {
+      console.error(switchError);
+      alert("Network switch failed");
+      return;
+    }
+  }
+
+  // 4️⃣ UI update
+  const userAddress = accounts[0];
+  document.getElementById("walletStatus").innerText =
+    "🟢 Connected (Base): " +
+    userAddress.slice(0, 6) +
+    "..." +
+    userAddress.slice(-4);
+
+  document.getElementById("game").style.display = "block";
+  document.getElementById("connectBtn").style.display = "none";
+
+  checkDailyLogin();
+};
+
+
+await window.ethereum.request({
+  method: "wallet_switchEthereumChain",
+  params: [{ chainId: "0x2105" }], // Base Mainnet
+});
+
+
+
+
+
+
   });
 
   const userAddress = accounts[0];
